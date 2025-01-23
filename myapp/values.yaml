@@ -1,0 +1,30 @@
+replicaCount: 1
+
+image:
+  repository: dmitrylosk/tutorial-app
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: NodePort
+  port: 3003
+  Nport: 32003
+
+postgresql:
+  image: postgres:13-alpine
+  username: vinhle
+  password: password
+  database: tutorial-dev
+  servicePort: 5432
+
+persistence:
+  enabled: true
+  storageClass: "local-path"
+  accessModes: ReadWriteOnce
+  size: 1Gi
+
+env:
+  DB_HOST: db
+  DB_NAME: tutorial-dev
+  DB_USER: vinhle
+  DB_PASS: password
